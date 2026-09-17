@@ -16,7 +16,7 @@ public class MainPage {
         return this;
     }
 
-@Step("Проверка отображения фамилии \"{lastName}\", имени \"{firstName}\", отчества \"{surname}\" пользователя")
+@Step("Проверка отображения ФИО пользователя: \"{fullName}\"")
     public MainPage checkProfilePopupMenu (String fullName){
         profilePopupMenu.shouldHave(text(fullName));
         return this;

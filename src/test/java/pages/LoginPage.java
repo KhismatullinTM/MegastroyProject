@@ -14,7 +14,11 @@ public class LoginPage {
     SelenideElement rememberMeLabel = $("label[for='remember_me']");
     SelenideElement submitButton =  $("button[type='submit']");
 
-
+    @Step ("Открытие страницы авторизации")
+    public LoginPage openLoginPage () {
+        open("/login");
+        return this;
+    }
 
     @Step("Вводим имя пользователя: {name}")
     public LoginPage setName (String name) {
@@ -25,11 +29,6 @@ public class LoginPage {
     @Step ("Вводим e-mail: {email}")
     public LoginPage setEmail (String email){
         emailInput.setValue(email);
-        return this;
-    }
-    @Step ("Открытие страницы авторизации")
-    public LoginPage openLoginPage () {
-        open("/login");
         return this;
     }
 

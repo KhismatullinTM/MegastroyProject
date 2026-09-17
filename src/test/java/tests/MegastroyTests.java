@@ -2,19 +2,25 @@ package tests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pages.LoginPage;
+import pages.MainPage;
 import testData.TestData;
 
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
 
 public class MegastroyTests extends TestBase {
 
     TestData testData = new TestData();
+    LoginPage loginPage = new LoginPage();
+    MainPage mainPage = new MainPage();
 
     @Test
     @DisplayName("Успешная регистрация с валидными данными")
     public void shouldRegistrationSuccessfully (){
+
         open("/registration?from=/");
         $("input[name='email']").setValue(testData.EMAIL);
         $("input[name='phone']").setValue(testData.PHONE_NUMBER);
@@ -35,14 +41,29 @@ public class MegastroyTests extends TestBase {
     @Test
     @DisplayName("Успешная авторизация с валидными данными")
     public void shouldLoginSuccessfully (){
-        open("/login");
-        $("input[name='email']").setValue("avito9195@gmail.com");
-        $("input[name='password']").setValue("]&O6WjVoKE");
-        $("label[for='remember_me']").click();
-        $("button[type='submit']").click();
+        step("Открытие страницы авторизации \"Мегастрой\"", () -> {
+        loginPage.openLoginPage();
+        });
+        step("Заполнение логина и пароиля пользователя", () -> {
+            loginPage.setEmail(testData.TIMUR_EMAIL).
+                    setPassword(testData.TIMUR_PASSWORD).
+                    rememberMeLabelClick().
+                    submitButtonClick();
+        });
+        step("Проверка авторизации пользователя", () -> {
+            mainPage.hoverProfileTab().
+                    checkProfilePopupMenu(testData.TIMUR_FULL_NAME);
+        });
 
-        $(".js-requisites-menu").hover();
-        $(".requisites-current-name").shouldHave(text("Тимур Тимур Тимур"));
+
+//        open("/login");
+//        $("input[name='email']").setValue("avito9195@gmail.com");
+//        $("input[name='password']").setValue("]&O6WjVoKE");
+//        $("label[for='remember_me']").click();
+//        $("button[type='submit']").click();
+//
+//        $(".js-requisites-menu").hover();
+//        $(".requisites-current-name").shouldHave(text("Тимур Тимур Тимур"));
     }
 
     @Test

@@ -1,9 +1,7 @@
 package pages;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import pages.components.UserFormComponent;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -15,6 +13,7 @@ public class LoginPage {
     SelenideElement passwordInput = $("input[name='password']");
     SelenideElement rememberMeLabel = $("label[for='remember_me']");
     SelenideElement submitButton =  $("button[type='submit']");
+
 
 
     @Step("Вводим имя пользователя: {name}")
@@ -47,9 +46,9 @@ public class LoginPage {
     }
 
    @Step("Кликаем на кнопку \"Войти\"")
-    public LoginPage
-    .click();
+    public MainPage submitButtonClick (){
+        submitButton.click();
+        return new MainPage();
+   }
 
-    $(".js-requisites-menu").hover();
-    $(".requisites-current-name").shouldHave(text("Тимур Тимур Тимур"));
 }

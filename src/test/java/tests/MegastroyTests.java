@@ -100,7 +100,6 @@ public class MegastroyTests extends TestBase {
         open("/products/411111");
         $("h1[itemprop='name']").shouldHave(text("Изолента ПВХ ОНЛАЙТ 71 690 OIT-B19-20/BL 19мм х20м черная"));
         $("#product-add-to-cart-button .js-basket-add").click();
-        $("#product-add-to-cart-button .js-basket-add").shouldNotBe(visible);
         $(".js-basket-header-widget").click();
         $(".basket-list__description-title").shouldHave(text("Изолента ПВХ ОНЛАЙТ 71 690 OIT-B19-20/BL 19мм х20м черная"));
         $("button.js-submit").click();

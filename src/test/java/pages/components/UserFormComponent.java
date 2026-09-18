@@ -8,6 +8,9 @@ import static com.codeborne.selenide.Selenide.$;
 public class UserFormComponent {
     private final SelenideElement nameInput = $("input[name='name']");
     private final SelenideElement emailInput = $("input[name='email']");
+    private final SelenideElement surnameInput = $("input[name='surname']");
+    private final SelenideElement firstNameInput = $("input[name='first_name']");
+    private final SelenideElement phoneInput = $("input[name='phone']");
 
     @Step("Вводим имя пользователя: {name}")
     public UserFormComponent setName (String name) {
@@ -21,9 +24,23 @@ public class UserFormComponent {
         return this;
     }
 
+    @Step ("Вводим имя клиента: {firstName}")
+    public UserFormComponent setFirstName (String firstName){
+        firstNameInput.setValue(firstName);
+        return this;
+    }
 
-//    $(".js-requisites-menu").hover();
-//    $(".requisites-current-name").shouldHave(text("Тимур Тимур Тимур"));
+    @Step ("Вводим фамилию клиента: {surname}")
+    public UserFormComponent setSurname (String surname){
+        surnameInput.setValue(surname);
+        return this;
+    }
+
+    @Step ("Вводим номер телефона клиента: {surname}")
+    public UserFormComponent setPhone (String phone){
+        phoneInput.setValue(phone);
+        return this;
+    }
 
 }
 

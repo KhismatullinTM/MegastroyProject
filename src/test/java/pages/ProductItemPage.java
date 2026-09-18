@@ -33,7 +33,7 @@ public class ProductItemPage {
         return this;
     }
 
-    @Step("Проверяем что товар \"{productItemName}\" добавился в козину")
+    @Step("Проверяем, что товар \"{productItemName}\" добавился в козину")
     public ProductItemPage checkAddedProductInBasket(String productItemName) {
         popup.hoverBasketTab();
         popup.checkProductItemNameInBasketMenu(productItemName);

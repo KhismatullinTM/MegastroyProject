@@ -1,5 +1,7 @@
 package tests;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
@@ -11,6 +13,9 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
+@Epic("Megastroy")
+@Feature("Магазин стройматериалов")
+@DisplayName("Тесты магазина Megastroy")
 public class MegastroyTests extends TestBase {
 
     TestData testData = new TestData();
@@ -54,16 +59,6 @@ public class MegastroyTests extends TestBase {
             mainPage.hoverProfileTab().
                     checkProfilePopupMenu(testData.TIMUR_FULL_NAME);
         });
-
-
-//        open("/login");
-//        $("input[name='email']").setValue("avito9195@gmail.com");
-//        $("input[name='password']").setValue("]&O6WjVoKE");
-//        $("label[for='remember_me']").click();
-//        $("button[type='submit']").click();
-//
-//        $(".js-requisites-menu").hover();
-//        $(".requisites-current-name").shouldHave(text("Тимур Тимур Тимур"));
     }
 
     @Test

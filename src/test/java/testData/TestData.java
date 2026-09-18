@@ -9,6 +9,7 @@ public class TestData {
     private final Faker fakerRu = new Faker (new Locale("ru"));
     private final Faker fakerEng = new Faker ();
 
+    public String cityShopName = "sterlitamak";
     public String USER_FIRST_NAME = fakerRu.name().firstName();
     public String USER_LAST_NAME = fakerRu.name().lastName();
     public String FULL_USER_NAME = USER_LAST_NAME + " " + USER_FIRST_NAME;

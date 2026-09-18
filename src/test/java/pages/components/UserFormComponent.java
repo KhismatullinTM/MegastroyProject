@@ -6,8 +6,8 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.$;
 
 public class UserFormComponent {
-    SelenideElement nameInput = $("input[name='name']");
-    SelenideElement emailInput = $("input[name='email']");
+    private final SelenideElement nameInput = $("input[name='name']");
+    private final SelenideElement emailInput = $("input[name='email']");
 
     @Step("Вводим имя пользователя: {name}")
     public UserFormComponent setName (String name) {

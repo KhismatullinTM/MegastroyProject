@@ -20,4 +20,5 @@ public class TestData {
     public String TIMUR_EMAIL = "avito9195@gmail.com";
     public String TIMUR_PASSWORD = "]&O6WjVoKE";
     public String TIMUR_FULL_NAME = "Тимур Тимур Тимур";
+    public String PRODUCT_ITEMS_NAME = "Обои";
 }

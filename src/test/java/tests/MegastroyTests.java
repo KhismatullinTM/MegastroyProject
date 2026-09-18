@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 import pages.MainPage;
+import pages.SearchResultPage;
 import testData.TestData;
 
 
@@ -21,6 +22,7 @@ public class MegastroyTests extends TestBase {
     TestData testData = new TestData();
     LoginPage loginPage = new LoginPage();
     MainPage mainPage = new MainPage();
+    SearchResultPage searchResult = new SearchResultPage();
 
     @Test
     @DisplayName("Успешная регистрация с валидными данными")
@@ -56,17 +58,23 @@ public class MegastroyTests extends TestBase {
                     submitButtonClick();
         });
         step("Проверка авторизации пользователя", () -> {
-            mainPage.hoverProfileTab().
-                    checkProfilePopupMenu(testData.TIMUR_FULL_NAME);
+            mainPage.checkFullNameAndEmailInPopupMenu(testData.TIMUR_FULL_NAME, testData.TIMUR_EMAIL);
         });
     }
 
     @Test
     @DisplayName("Успешный поиск товаров через поисковую строку")
     public void shouldSearchProductSuccessfully (){
-        open("/");
-        $("input[name='q']").setValue("Обои").pressEnter();
-        $$(".js-search-product-link").first().shouldHave(attributeMatching("title", "(?i).*" + "Обои" + ".*"));
+        step("Открытие главного экрана ", () -> {
+            mainPage.openMainPage();
+        });
+        SearchResultPage searchResult = step("Поиск товара", () ->
+            mainPage.searchBarCall().
+                    searchInput(testData.PRODUCT_ITEMS_NAME)
+        );
+        step("Проверка отображение товара на странице", () -> {
+            searchResult.checkFirstProductContains(testData.PRODUCT_ITEMS_NAME);
+        });
     }
 
     @Test

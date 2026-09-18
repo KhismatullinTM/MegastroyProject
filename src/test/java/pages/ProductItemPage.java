@@ -1,0 +1,43 @@
+package pages;
+
+import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
+import pages.components.PopupComponent;
+
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
+
+public class ProductItemPage {
+
+    private final PopupComponent popup = new PopupComponent();
+
+    private final SelenideElement nameProductInPage= $("h1[itemprop='name']");
+    private final SelenideElement basketButton = $("#product-add-to-cart-button .js-basket-add");
+
+    @Step("Открываем страницу товара \"{productNumberPage}\"")
+    public ProductItemPage openProductItemPage(String productNumberPage){
+        open("/products/" + productNumberPage);
+        return this;
+    }
+
+    @Step("Проверяем, что открывшаяся страница принадлежит товару: \"{productItemName}\"")
+    public ProductItemPage checkNameProductItem(String productItemName) {
+        nameProductInPage.shouldHave(text(productItemName));
+        return this;
+    }
+
+    @Step("Кликаем на кнопку \"В корзину\"")
+    public ProductItemPage clickBasketButton(){
+        basketButton.click();
+        return this;
+    }
+
+    @Step("Проверяем что товар \"{productItemName}\" добавился в козину")
+    public ProductItemPage checkAddedProductInBasket(String productItemName) {
+        popup.hoverBasketTab();
+        popup.checkProductItemNameInBasketMenu(productItemName);
+        return this;
+    }
+
+}

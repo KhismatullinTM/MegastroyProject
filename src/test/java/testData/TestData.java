@@ -21,4 +21,7 @@ public class TestData {
     public String TIMUR_PASSWORD = "]&O6WjVoKE";
     public String TIMUR_FULL_NAME = "Тимур Тимур Тимур";
     public String PRODUCT_ITEMS_NAME = "Обои";
+
+    public String PRODUCT_NUMBER_ITEM = "290517";
+    public String PRODUCT_ITEM_NAME = "Печь банная чугунная Везувий Легенда 16 (ДТ-4)";
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 import pages.MainPage;
+import pages.ProductItemPage;
 import pages.SearchResultPage;
 import testData.TestData;
 
@@ -23,6 +24,7 @@ public class MegastroyTests extends TestBase {
     LoginPage loginPage = new LoginPage();
     MainPage mainPage = new MainPage();
     SearchResultPage searchResult = new SearchResultPage();
+    ProductItemPage productItem = new ProductItemPage();
 
     @Test
     @DisplayName("Успешная регистрация с валидными данными")
@@ -68,10 +70,10 @@ public class MegastroyTests extends TestBase {
         step("Открытие главного экрана ", () -> {
             mainPage.openMainPage();
         });
-        SearchResultPage searchResult = step("Поиск товара", () ->
+        step("Поиск товара", () -> {
             mainPage.searchBarCall().
-                    searchInput(testData.PRODUCT_ITEMS_NAME)
-        );
+                    searchInput(testData.PRODUCT_ITEMS_NAME);
+        });
         step("Проверка отображение товара на странице", () -> {
             searchResult.checkFirstProductContains(testData.PRODUCT_ITEMS_NAME);
         });
@@ -80,16 +82,21 @@ public class MegastroyTests extends TestBase {
     @Test
     @DisplayName("Успешное добавление товара в корзину")
     public void shouldAddedProductInBasketSuccessfully (){
-        open("/products/290517");
-        $("h1[itemprop='name']").shouldHave(text("Печь банная чугунная Везувий Легенда 16 (ДТ-4)"));
-        $("#product-add-to-cart-button .js-basket-add").click();
-        $(".js-basket-header-widget").hover();
-        $(".product-item__content-title").shouldHave(text("Печь банная чугунная Везувий Легенда 16 (ДТ-4)"));
+        step("Открытие страницы товара", () -> {
+            productItem.openProductItemPage(testData.PRODUCT_NUMBER_ITEM);
+        });
+        step("Добавление товара в корзину", () -> {
+            productItem.checkNameProductItem(testData.PRODUCT_ITEM_NAME).
+                    clickBasketButton();
+        });
+        step("Проверка добавление товара в корзину", () -> {
+            productItem.checkAddedProductInBasket(testData.PRODUCT_ITEM_NAME);
+        });
     }
 
     @Test
     @DisplayName("Успешное создание заказа")
-    public void shouldCreateOrderSuccessfully (){
+    public void shouldCreateOrderSuccessfully() {
         open("/products/411111");
         $("h1[itemprop='name']").shouldHave(text("Изолента ПВХ ОНЛАЙТ 71 690 OIT-B19-20/BL 19мм х20м черная"));
         $("#product-add-to-cart-button .js-basket-add").click();

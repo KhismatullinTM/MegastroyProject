@@ -26,4 +26,7 @@ public class TestData {
     public String SECOND_PRODUCT_NUMBER_ITEM = "411111";
     public String SECOND_PRODUCT_ITEM_NAME = "Изолента ПВХ ОНЛАЙТ 71 690 OIT-B19-20/BL 19мм х20м черная";
     public String ADDRESS_SHOP_NAME = "Стерлитамак, пр-т Октября, 36";
+    public String CHANGED_CITY_NAME = "Саранск";
+    public String CHANGED_ADDRESS_SHOP_NAME = "Саранск, ул. Севастопольская, 5";
+
 }

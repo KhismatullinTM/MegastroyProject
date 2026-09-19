@@ -118,21 +118,17 @@ public class MegastroyTests extends TestBase {
     @Test
     @DisplayName("Смена адреса местонахождения магазина")
     public void shouldApplyPromoCodeSuccessfully (){
-        open("/");
-        $(".header-city").click();
-        $$(".js-city-container").findBy(text("Саранск")).click();
-        $("[data-city-id='7'] .city-location[data-market-id='9'] .js-market-link").click();
-        $(".header-city__link").shouldHave(text("Саранск, ул. Севастопольская, 5"));
-//        $(".js-fancybox-city").click();              // открыть окно
-//        $("[data-market-id='6'] .js-market-link").click();  // выбрать
-//        $("h1[itemprop='name']").shouldHave(text("Изолента ПВХ ОНЛАЙТ 71 690 OIT-B19-20/BL 19мм х20м черная"));
-//        $("#product-add-to-cart-button .js-basket-add").click();
-//        $("#product-add-to-cart-button .js-basket-add").shouldNotBe(visible);
-//        $(".js-basket-header-widget").click();
-//        $(".basket-list__description-title").shouldHave(text("Изолента ПВХ ОНЛАЙТ 71 690 OIT-B19-20/BL 19мм х20м черная"));
-//        $("button.js-submit").click();
-//        $("input[name='promo_coupon_code']").setValue("ПЕРВЫЙ");
-//        $(".promo-list").$(byText("Применить")).click();
+        step("Открытие главного экрана ", () -> {
+            mainPage.openMainPage();
+        });
+        step("Смена адреса магазина", () -> {
+            mainPage.clickAddressShopButton().
+                    selectCity(testData.CHANGED_CITY_NAME).
+                    selectShop();
+        });
+        step("Проверка смены магазина", () -> {
+            mainPage.checkNewAddressShop(testData.CHANGED_ADDRESS_SHOP_NAME);
+        });
     }
 
     @Test

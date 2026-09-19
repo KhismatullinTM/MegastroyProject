@@ -2,6 +2,8 @@ package pages.components;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import pages.BasketPage;
+import pages.ProductItemPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -38,9 +40,16 @@ public class PopupComponent {
         return this;
     }
 
+    @Step("Кликаем на вкладку «Корзина»")
+    public BasketPage clickBasketMenu() {
+        basketMenu.click();
+        return new BasketPage();
+    }
+
     @Step("Проверка отображения товара: \"{productItemName}\" в корзине")
     public PopupComponent checkProductItemNameInBasketMenu(String productItemName) {
         productItemNameInBasketMenu.shouldHave(text(productItemName));
         return this;
     }
+
  }

@@ -4,10 +4,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.LoginPage;
-import pages.MainPage;
-import pages.ProductItemPage;
-import pages.SearchResultPage;
+import pages.*;
 import testData.TestData;
 
 
@@ -25,6 +22,7 @@ public class MegastroyTests extends TestBase {
     MainPage mainPage = new MainPage();
     SearchResultPage searchResult = new SearchResultPage();
     ProductItemPage productItem = new ProductItemPage();
+    OrderSuccessPage orderSuccess = new OrderSuccessPage();
 
     @Test
     @DisplayName("Успешная регистрация с валидными данными")
@@ -83,35 +81,39 @@ public class MegastroyTests extends TestBase {
     @DisplayName("Успешное добавление товара в корзину")
     public void shouldAddedProductInBasketSuccessfully (){
         step("Открытие страницы товара", () -> {
-            productItem.openProductItemPage(testData.PRODUCT_NUMBER_ITEM);
+            productItem.openProductItemPage(testData.FIRST_PRODUCT_NUMBER_ITEM);
         });
         step("Добавление товара в корзину", () -> {
-            productItem.checkNameProductItem(testData.PRODUCT_ITEM_NAME).
-                    clickBasketButton();
+            productItem.checkNameProductItem(testData.FIRST_PRODUCT_ITEM_NAME).
+                    clickAddInBasket();
         });
         step("Проверка добавление товара в корзину", () -> {
-            productItem.checkAddedProductInBasket(testData.PRODUCT_ITEM_NAME);
+            productItem.checkAddedProductInBasket(testData.FIRST_PRODUCT_ITEM_NAME);
         });
     }
 
     @Test
     @DisplayName("Успешное создание заказа")
     public void shouldCreateOrderSuccessfully() {
-        open("/products/411111");
-        $("h1[itemprop='name']").shouldHave(text("Изолента ПВХ ОНЛАЙТ 71 690 OIT-B19-20/BL 19мм х20м черная"));
-        $("#product-add-to-cart-button .js-basket-add").click();
-        $(".js-basket-header-widget").click();
-        $(".basket-list__description-title").shouldHave(text("Изолента ПВХ ОНЛАЙТ 71 690 OIT-B19-20/BL 19мм х20м черная"));
-        $("button.js-submit").click();
-        $("input[name='first_name']").setValue(testData.USER_FIRST_NAME);
-        $("input[name='surname']").setValue(testData.USER_LAST_NAME);
-        $("input[name='phone']").setValue(testData.PHONE_NUMBER);
-        $("#m_pickup").shouldBe(checked);
-        $$(".order-list__item").findBy(text("Адрес гипермаркета")).$(".order-notice").shouldHave(text("Стерлитамак, пр-т Октября, 36"));
-        $("label[for='cash_in_market']").click();
-        $$("button").findBy(text("Оформить заказ")).click();
-        $("h1").shouldHave(matchText("Ваш заказ №\\d+ принят"));
-    }
+        step("Открытие страницы товара", () -> {
+            productItem.openProductItemPage(testData.SECOND_PRODUCT_NUMBER_ITEM);
+        });
+        step("Выполняем заказ товара", () -> {
+            productItem.checkNameProductItem(testData.SECOND_PRODUCT_ITEM_NAME).
+                    clickAddInBasket().
+                    openBasket().
+                    checkAddedBasketItem(testData.SECOND_PRODUCT_ITEM_NAME).
+                    clickSubmitButton().
+                    setFullDetailsOrder(testData.USER_FIRST_NAME, testData.USER_LAST_NAME, testData.PHONE_NUMBER).
+                    checkPickupSelected().
+                    checkAddressShop(testData.ADDRESS_SHOP_NAME).
+                    cashPaymentLabelClick().
+                    submitOrderButtonClick();
+        });
+        step("Проверка создания заказа", () -> {
+            orderSuccess.checkOrderAccepted();
+        });
+}
 
     @Test
     @DisplayName("Смена адреса местонахождения магазина")

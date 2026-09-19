@@ -9,20 +9,19 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import testData.TestData;
+import testData.ConfigData;
 
 import java.util.Map;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class TestBase {
 
-    static TestData testData = new TestData();
+    static ConfigData configData = new ConfigData();
 
     @BeforeAll
     static void setUp() {
-        Configuration.baseUrl = System.getProperty("URL", "https://" + testData.cityShopName + ".megastroy.com");
+        Configuration.baseUrl = System.getProperty("URL", "https://" + configData.CITY_SHOP_NAME + ".megastroy.com");
         Configuration.browser = System.getProperty("BROWSER", "chrome");
         Configuration.browserSize = System.getProperty("BROWSER_SIZE");
         Configuration.browserVersion = System.getProperty("BROWSER_VERSION");

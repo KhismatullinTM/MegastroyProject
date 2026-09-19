@@ -36,7 +36,7 @@ public class UserFormComponent {
         return this;
     }
 
-    @Step ("Вводим номер телефона клиента: {surname}")
+    @Step ("Вводим номер телефона клиента: {phone}")
     public UserFormComponent setPhone (String phone){
         phoneInput.setValue(phone);
         return this;

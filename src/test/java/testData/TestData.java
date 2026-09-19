@@ -9,7 +9,6 @@ public class TestData {
     private final Faker fakerRu = new Faker (new Locale("ru"));
     private final Faker fakerEng = new Faker ();
 
-    public String cityShopName = "sterlitamak";
     public String USER_FIRST_NAME = fakerRu.name().firstName();
     public String USER_LAST_NAME = fakerRu.name().lastName();
     public String FULL_USER_NAME = USER_LAST_NAME + " " + USER_FIRST_NAME;
@@ -22,6 +21,9 @@ public class TestData {
     public String TIMUR_FULL_NAME = "Тимур Тимур Тимур";
     public String PRODUCT_ITEMS_NAME = "Обои";
 
-    public String PRODUCT_NUMBER_ITEM = "290517";
-    public String PRODUCT_ITEM_NAME = "Печь банная чугунная Везувий Легенда 16 (ДТ-4)";
+    public String FIRST_PRODUCT_NUMBER_ITEM = "290517";
+    public String FIRST_PRODUCT_ITEM_NAME = "Печь банная чугунная Везувий Легенда 16 (ДТ-4)";
+    public String SECOND_PRODUCT_NUMBER_ITEM = "411111";
+    public String SECOND_PRODUCT_ITEM_NAME = "Изолента ПВХ ОНЛАЙТ 71 690 OIT-B19-20/BL 19мм х20м черная";
+    public String ADDRESS_SHOP_NAME = "Стерлитамак, пр-т Октября, 36";
 }

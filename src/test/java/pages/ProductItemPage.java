@@ -5,8 +5,7 @@ import io.qameta.allure.Step;
 import pages.components.PopupComponent;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class ProductItemPage {
 
@@ -28,9 +27,15 @@ public class ProductItemPage {
     }
 
     @Step("Кликаем на кнопку \"В корзину\"")
-    public ProductItemPage clickBasketButton(){
+    public ProductItemPage clickAddInBasket(){
         basketButton.click();
+        sleep(4000);
         return this;
+    }
+
+    @Step("Кликаем на вкладку \"Корзина\"")
+    public BasketPage openBasket(){
+        return popup.clickBasketMenu();
     }
 
     @Step("Проверяем, что товар \"{productItemName}\" добавился в козину")

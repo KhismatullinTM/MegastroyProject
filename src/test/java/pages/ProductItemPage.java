@@ -13,6 +13,8 @@ public class ProductItemPage {
 
     private final SelenideElement nameProductInPage= $("h1[itemprop='name']");
     private final SelenideElement basketButton = $("#product-add-to-cart-button .js-basket-add");
+    private final SelenideElement favoriteButton = $(".products-icon__item.js-favorite");
+
 
     @Step("Открываем страницу товара \"{productNumberPage}\"")
     public ProductItemPage openProductItemPage(String productNumberPage){
@@ -45,4 +47,17 @@ public class ProductItemPage {
         return this;
     }
 
+    @Step("Кликаем на кнопку \"В избранное\"")
+    public ProductItemPage addToFavorites() {
+        executeJavaScript("arguments[0].click();", favoriteButton);
+        sleep(4000);
+        return this;
+    }
+
+    @Step("Переход на страницу \"Избранное\"")
+    public ProductItemPage openFavorites() {
+        popup.clickFavoriteMenu();
+        sleep(4000);
+        return this;
+    }
 }

@@ -23,6 +23,7 @@ public class MegastroyTests extends TestBase {
     SearchResultPage searchResult = new SearchResultPage();
     ProductItemPage productItem = new ProductItemPage();
     OrderSuccessPage orderSuccess = new OrderSuccessPage();
+    FavoritePage favoritePage = new FavoritePage();
 
     @Test
     @DisplayName("Успешная регистрация с валидными данными")
@@ -134,10 +135,16 @@ public class MegastroyTests extends TestBase {
     @Test
     @DisplayName("Успешное добавление товара в избранное")
     public void shouldAddedProductInFavoritesSuccessfully (){
-        open("/products/290517");
-        $("h1[itemprop='name']").shouldHave(text("Печь банная чугунная Везувий Легенда 16 (ДТ-4)"));
-        executeJavaScript("arguments[0].click();", $(".products-icon__item.js-favorite"));
-        $("a[href='/favorites/']").click();
-        $(".js-search-product-link[title*='Печь банная чугунная Везувий Легенда 16']").shouldBe(visible);
+        step("Открытие страницы товара", () -> {
+            productItem.openProductItemPage(testData.FIRST_PRODUCT_NUMBER_ITEM);
+        });
+        step("Добавление товара в избранное", () -> {
+            productItem.checkNameProductItem(testData.FIRST_PRODUCT_ITEM_NAME).
+                    addToFavorites().
+                    openFavorites();
+        });
+        step("Проверка добавления товара в избранное", () -> {
+            favoritePage.chekProductNameInFavorite(testData.FIRST_PRODUCT_ITEM_NAME);
+        });
     }
 }

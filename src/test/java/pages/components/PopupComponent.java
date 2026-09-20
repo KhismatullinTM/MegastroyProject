@@ -3,7 +3,7 @@ package pages.components;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import pages.BasketPage;
-import pages.ProductItemPage;
+import pages.FavoritePage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -14,6 +14,7 @@ public class PopupComponent {
     private final SelenideElement emailInProfilePopupMenu = $(".requisites-current-details");
     private final SelenideElement basketMenu = $(".js-basket-header-widget");
     private final SelenideElement productItemNameInBasketMenu = $(".product-item__content-title");
+    private final SelenideElement favoriteMenu = $("a[href='/favorites/']");
 
 
     @Step("Наводим курсор на вкладку \"Профиль\"")
@@ -50,6 +51,12 @@ public class PopupComponent {
     public PopupComponent checkProductItemNameInBasketMenu(String productItemName) {
         productItemNameInBasketMenu.shouldHave(text(productItemName));
         return this;
+    }
+
+    @Step("Кликаем на вкладку «Избранное»")
+    public FavoritePage clickFavoriteMenu() {
+        favoriteMenu.click();
+        return new FavoritePage();
     }
 
  }

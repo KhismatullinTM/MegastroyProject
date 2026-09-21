@@ -24,27 +24,29 @@ public class MegastroyTests extends TestBase {
     ProductItemPage productItem = new ProductItemPage();
     OrderSuccessPage orderSuccess = new OrderSuccessPage();
     FavoritePage favoritePage = new FavoritePage();
+    RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
     @DisplayName("Успешная регистрация с валидными данными")
     public void shouldRegistrationSuccessfully (){
 
-        open("/registration?from=/");
-        $("input[name='email']").setValue(testData.EMAIL);
-        $("input[name='phone']").setValue(testData.PHONE_NUMBER);
-        $("input[name='first_name']").setValue(testData.USER_FIRST_NAME);
-        $("input[name='surname']").setValue(testData.USER_LAST_NAME);
-        $("input[name='password']").setValue("]&O6WjVoKE");
-        $("input[name='password_confirmation']").setValue("]&O6WjVoKE");
-        executeJavaScript("arguments[0].click();", $("#subscribe"));
-        executeJavaScript("arguments[0].click();", $("button[type='submit']"));
-        // asserts
-        $(".js-requisites-menu").hover();
-        $(".requisites-current-name").shouldHave(text(testData.FULL_USER_NAME));
-        $(".requisites-current-details").shouldHave(text(testData.EMAIL));
-        System.out.println("e-mail: " + testData.EMAIL);
-        System.out.println("phone: " + testData.PHONE_NUMBER);
-    }
+            step("Открытие страницы регистрации \"Мегастрой\"", () -> {
+        registrationPage.openRegistrationPage();
+    });
+    step("Заполнение данных клиента", () -> {
+        registrationPage.setEmail(testData.EMAIL).
+                setPhone(testData.PHONE_NUMBER).
+                setFirstName(testData.USER_FIRST_NAME).
+                setSurname(testData.USER_LAST_NAME).
+                setRegistrationPassword(testData.TIMUR_PASSWORD).
+                setPasswordConfirmation(testData.TIMUR_PASSWORD).
+                subscribeLabelClick().
+                submitRegistrationButtonClick();
+    });
+    step("Проверка регистрации пользователя", () -> {
+        mainPage.checkFullNameAndEmailInPopupMenu(testData.FULL_USER_NAME, testData.EMAIL);
+    });
+}
 
     @Test
     @DisplayName("Успешная авторизация с валидными данными")
@@ -52,7 +54,7 @@ public class MegastroyTests extends TestBase {
         step("Открытие страницы авторизации \"Мегастрой\"", () -> {
         loginPage.openLoginPage();
         });
-        step("Заполнение логина и пароиля пользователя", () -> {
+        step("Заполнение логина и пароля пользователя", () -> {
             loginPage.setEmail(testData.TIMUR_EMAIL).
                     setPassword(testData.TIMUR_PASSWORD).
                     rememberMeLabelClick().

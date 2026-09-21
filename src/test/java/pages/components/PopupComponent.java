@@ -16,7 +16,6 @@ public class PopupComponent {
     private final SelenideElement productItemNameInBasketMenu = $(".product-item__content-title");
     private final SelenideElement favoriteMenu = $("a[href='/favorites/']");
 
-
     @Step("Наводим курсор на вкладку \"Профиль\"")
     public PopupComponent hoverProfileTab() {
         profileMenu.hover();

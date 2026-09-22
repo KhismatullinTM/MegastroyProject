@@ -11,14 +11,13 @@ public class TestData {
 
     public String USER_FIRST_NAME = fakerRu.name().firstName();
     public String USER_LAST_NAME = fakerRu.name().lastName();
-    public String FULL_USER_NAME = USER_LAST_NAME + " " + USER_FIRST_NAME;
-    public String EMAIL = fakerEng.internet().emailAddress();
-    public String PHONE_NUMBER = fakerRu.phoneNumber().phoneNumber().replaceFirst("^[87]", "+7");
-    public String DAY_OF_BIRTH = String.valueOf(fakerRu.number().numberBetween(1, 31));
+    public String USER_FULL_NAME = USER_LAST_NAME + " " + USER_FIRST_NAME;
+    public String USER_EMAIL = fakerEng.internet().emailAddress();
+    public String USER_PHONE_NUMBER = fakerRu.phoneNumber().phoneNumber().replaceFirst("^[87]", "+7");
 
-    public String TIMUR_EMAIL = "avito9195@gmail.com";
-    public String TIMUR_PASSWORD = "]&O6WjVoKE";
-    public String TIMUR_FULL_NAME = "Тимур Тимур Тимур";
+    public String EXISTING_USER_EMAIL = "erich.witting@yahoo.com";
+    public String EXISTING_USER_PASSWORD = "]&O6WjVoKE";
+    public String EXISTING_USER_FULL_NAME = "Горшкова Ольга";
     public String PRODUCT_ITEMS_NAME = "Обои";
 
     public String FIRST_PRODUCT_NUMBER_ITEM = "290517";

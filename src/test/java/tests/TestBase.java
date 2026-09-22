@@ -40,12 +40,12 @@ public class TestBase {
 
         Configuration.browserCapabilities = capabilities;
 
-//        String selenoidUrl = System.getProperty("SELENOID_URL");
-//        if (selenoidUrl == null || selenoidUrl.isEmpty() || "null".equals(selenoidUrl)) {
-//            selenoidUrl = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-//        }
-//
-//        Configuration.remote = selenoidUrl;
+        String selenoidUrl = System.getProperty("SELENOID_URL");
+        if (selenoidUrl == null || selenoidUrl.isEmpty() || "null".equals(selenoidUrl)) {
+            selenoidUrl = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        }
+
+        Configuration.remote = selenoidUrl;
     }
 
     @BeforeEach

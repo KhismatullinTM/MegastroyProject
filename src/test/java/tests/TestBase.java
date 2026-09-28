@@ -3,6 +3,7 @@ package tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Attach;
+import helpers.PopupHelper;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -30,7 +31,14 @@ public class TestBase {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--disable-dev-shm-usage", "--no-sandbox");
+        chromeOptions.addArguments(
+                "--disable-dev-shm-usage",
+                "--no-sandbox",
+                "--host-rules=MAP personalization-web.g.mindbox.ru 0.0.0.0, " +
+                        "MAP personalization-speedtest.g.mindbox.ru 0.0.0.0, " +
+                        "MAP web-static.mindbox.ru 0.0.0.0, " +
+                        "MAP personalization-web.mindbox.ru 0.0.0.0"
+        );
         capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
@@ -44,19 +52,20 @@ public class TestBase {
         if (selenoidUrl == null || selenoidUrl.isEmpty() || "null".equals(selenoidUrl)) {
             selenoidUrl = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
         }
-
         Configuration.remote = selenoidUrl;
     }
 
     @BeforeEach
-    void addListener() {
+    void setUpPage() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
         open("/");
         executeJavaScript("document.querySelector('#accept-cookie-notification')?.click();");
+        PopupHelper.start();
     }
 
     @AfterEach
-    void tearDown (){
+    void tearDown() {
+        PopupHelper.stop();
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();

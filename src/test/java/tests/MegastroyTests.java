@@ -7,9 +7,6 @@ import org.junit.jupiter.api.Test;
 import pages.*;
 import testData.TestData;
 
-
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
 @Epic("Megastroy")

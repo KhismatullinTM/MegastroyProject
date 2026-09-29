@@ -6,6 +6,7 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class PopupHelper {
+
     private static final long INTERVAL_MS = 500;
     private static Thread killer;
 

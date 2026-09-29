@@ -10,7 +10,7 @@ import testData.TestData;
 import static io.qameta.allure.Allure.step;
 
 @Epic("Megastroy")
-@Feature("Магазин стройматериалов")
+@Feature("Магазин стройматериалов \"Megastroy\"")
 @DisplayName("Тесты магазина Megastroy")
 public class MegastroyTests extends TestBase {
 

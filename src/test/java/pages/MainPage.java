@@ -17,7 +17,6 @@ public class MainPage {
     private final SelenideElement addressShopButton = $(".header-city");
     private final SelenideElement addressShopNameButton = $(".header-city__link");
 
-    @Step("Открываем главный экран \"Megastroy\"")
     public MainPage openMainPage() {
         open("/");
         return this;
@@ -35,13 +34,11 @@ public class MainPage {
         return searchBar;
     }
 
-    @Step("Нажимаем на кнопку Адреса магазина")
     public ShopSelectionPage clickAddressShopButton() {
         addressShopButton.click();
         return new ShopSelectionPage();
     }
 
-    @Step("Проверяем, что адрес магазина изменен на : \"{changedAddressShop}\" на кнопку Адреса магазина")
     public MainPage checkNewAddressShop(String changedAddressShop) {
         addressShopNameButton.shouldHave(text(changedAddressShop));
         return this;

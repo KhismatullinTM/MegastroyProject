@@ -1,7 +1,5 @@
 package tests;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.*;
@@ -31,19 +29,17 @@ public class MegastroyTests extends TestBase {
         registrationPage.openRegistrationPage();
     });
     step("Заполнение данных клиента", () -> {
-        registrationPage.setEmail(testData.USER_EMAIL).
-                setPhone(testData.USER_PHONE_NUMBER).
-                setFirstName(testData.USER_FIRST_NAME).
-                setSurname(testData.USER_LAST_NAME).
+        registrationPage.setEmail(testData.userEmail).
+                setPhone(testData.userPhoneNumber).
+                setFirstName(testData.userFirstName).
+                setSurname(testData.userLastName).
                 setRegistrationPassword(testData.EXISTING_USER_PASSWORD).
                 setPasswordConfirmation(testData.EXISTING_USER_PASSWORD).
                 subscribeLabelClick().
                 submitRegistrationButtonClick();
-        System.out.println(testData.USER_PHONE_NUMBER);
-        System.out.println(testData.EXISTING_USER_EMAIL);
     });
     step("Проверка регистрации пользователя", () -> {
-        mainPage.checkFullNameAndEmailInPopupMenu(testData.USER_FULL_NAME, testData.USER_EMAIL);
+        mainPage.checkFullNameAndEmailInPopupMenu(testData.userFullName, testData.userEmail);
 
     });
 }
@@ -107,7 +103,7 @@ public class MegastroyTests extends TestBase {
                     openBasket().
                     checkAddedBasketItem(testData.SECOND_PRODUCT_ITEM_NAME).
                     clickSubmitButton().
-                    setFullDetailsOrder(testData.USER_FIRST_NAME, testData.USER_LAST_NAME, testData.USER_PHONE_NUMBER).
+                    setFullDetailsOrder(testData.userFirstName, testData.userLastName, testData.userPhoneNumber).
                     checkPickupSelected().
                     checkAddressShop(testData.ADDRESS_SHOP_NAME).
                     cashPaymentLabelClick().

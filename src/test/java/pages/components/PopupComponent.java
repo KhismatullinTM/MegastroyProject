@@ -16,7 +16,6 @@ public class PopupComponent {
     private final SelenideElement productItemNameInBasketMenu = $(".product-item__content-title");
     private final SelenideElement favoriteMenu = $("a[href='/favorites/']");
 
-    @Step("Наводим курсор на вкладку \"Профиль\"")
     public PopupComponent hoverProfileTab() {
         profileMenu.hover();
         return this;
@@ -34,13 +33,11 @@ public class PopupComponent {
         return this;
     }
 
-    @Step("Наводим курсор на вкладку \"Корзина\"")
     public PopupComponent hoverBasketTab() {
         basketMenu.hover();
         return this;
     }
 
-    @Step("Кликаем на вкладку «Корзина»")
     public BasketPage clickBasketMenu() {
         basketMenu.click();
         return new BasketPage();
@@ -52,7 +49,6 @@ public class PopupComponent {
         return this;
     }
 
-    @Step("Кликаем на вкладку «Избранное»")
     public FavoritePage clickFavoriteMenu() {
         favoriteMenu.click();
         return new FavoritePage();

@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class OrderPage {
 
-    private UserFormComponent userForm = new UserFormComponent();
+    private final UserFormComponent userForm = new UserFormComponent();
 
     private final SelenideElement pickupRadio = $("#m_pickup");
     private final SelenideElement addressBlock = $$(".order-list__item").findBy(text("Адрес гипермаркета"));
@@ -28,25 +28,21 @@ public class OrderPage {
         return this;
     }
 
-    @Step("Проверяем, что выбран способ доставки: \"Самовывоз из гипермаркета\"")
     public OrderPage checkPickupSelected () {
         pickupRadio.shouldBe(checked);
         return this;
     }
 
-    @Step("Проверяем адрес выбранного магазина: \"{addressShop}\"")
     public OrderPage checkAddressShop (String addressShop) {
         addressText.shouldHave(text(addressShop));
         return this;
     }
 
-    @Step("Выбираем способ оплаты \"Наличными\"")
     public OrderPage cashPaymentLabelClick () {
         cashPaymentLabel.click();
         return this;
     }
 
-    @Step("Нажимаем на кнопку \"Оформить заказ\"")
     public OrderSuccessPage submitOrderButtonClick () {
         submitOrderButton.click();
         return new OrderSuccessPage();

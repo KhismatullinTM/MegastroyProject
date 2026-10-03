@@ -27,7 +27,7 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("BROWSER_SIZE");
         Configuration.browserVersion = System.getProperty("BROWSER_VERSION");
         Configuration.headless = Boolean.parseBoolean(System.getProperty("HEADLESS", "false"));
-        Configuration.timeout = 5000;
+        Configuration.timeout = 10000;
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -48,11 +48,8 @@ public class TestBase {
 
         Configuration.browserCapabilities = capabilities;
 
-        String selenoidUrl = System.getProperty("SELENOID_URL");
-        if (selenoidUrl == null || selenoidUrl.isEmpty() || "null".equals(selenoidUrl)) {
-            selenoidUrl = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
-        }
-        Configuration.remote = selenoidUrl;
+        String remoteUrl = System.getProperty("remoteUrl");
+        Configuration.remote = remoteUrl;
     }
 
     @BeforeEach

@@ -1,8 +1,6 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-
-import io.qameta.allure.Step;
 import pages.components.UserFormComponent;
 
 import static com.codeborne.selenide.Condition.checked;
@@ -20,7 +18,6 @@ public class OrderPage {
     private final SelenideElement cashPaymentLabel = $("label[for='cash_in_market']");
     private final SelenideElement submitOrderButton = $$("button").findBy(text("Оформить заказ"));
 
-    @Step("Вводим данные клиента для заказа")
     public OrderPage setFullDetailsOrder (String firstName, String surname, String phone) {
         userForm.setFirstName(firstName);
         userForm.setSurname(surname);

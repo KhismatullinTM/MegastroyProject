@@ -1,7 +1,6 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
-import io.qameta.allure.Step;
 import pages.components.PopupComponent;
 import pages.components.SearchBarComponent;
 
@@ -22,7 +21,6 @@ public class MainPage {
         return this;
     }
 
-    @Step("Проверяем ФИО пользователя: «{fullName}»")
     public MainPage checkFullNameAndEmailInPopupMenu(String fullName, String email) {
         popup.hoverProfileTab();
         popup.checkProfilePopupMenu(fullName);
